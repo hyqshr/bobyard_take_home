@@ -17,8 +17,6 @@ Run Migrations (If necessary):
 python manage.py migrate
 ```
 
-Run Migrations (If necessary):
-
 Start the Django Server:
 
 ```
