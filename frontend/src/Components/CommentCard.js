@@ -3,9 +3,10 @@ import axios from 'axios';
 import { Edit, Trash } from 'react-feather'; // Importing icons
 import './CommentCard.css';
 
-const CommentCard = ({ id, author, text, date, likes, image, onCommentUpdate }) => {
+const CommentCard = ({ id, author, text, date, likes, image, onCommentUpdate, replies = [], indentLevel = 0  }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editedText, setEditedText] = useState(text);
+    const indentStyle = { marginLeft: `${indentLevel * 20}px`, borderLeft: indentLevel > 0 ? '1px solid #ddd' : 'none', paddingLeft: '10px' };
 
     const handleSaveEdit = () => {
         if (editedText !== text) {
@@ -32,7 +33,7 @@ const CommentCard = ({ id, author, text, date, likes, image, onCommentUpdate }) 
     };
 
     return (
-        <div className="comment-card">
+        <div className="comment-card" style={indentStyle}>
             <div className="comment-header">
                 <div className="comment-author">{author}</div>
                 <div className="comment-actions">
@@ -62,6 +63,20 @@ const CommentCard = ({ id, author, text, date, likes, image, onCommentUpdate }) 
                 </div>
             )}
             <div className="comment-date">{new Date(date).toLocaleDateString()}</div>
+            {replies.map(reply => (
+                <CommentCard 
+                    key={reply.id}
+                    id={reply.id}
+                    author={reply.author}
+                    text={reply.text}
+                    date={reply.date}
+                    likes={reply.likes}
+                    image={reply.image}
+                    replies={reply.replies}
+                    onCommentUpdate={onCommentUpdate}
+                    indentLevel={indentLevel + 1}
+                />
+            ))}
         </div>
     );
 };
