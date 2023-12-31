@@ -23,10 +23,11 @@ def load_comments(json_path):
                     'text': item['text'],
                     'date': parser.parse(item['date']),  # Use dateutil's parser
                     'likes': item['likes'],
-                    'image': item['image']
+                    'image': item['image'],
+                    'parent': item['parent']
                 }
             )
 
 if __name__ == "__main__":
-    json_path = './comments.json'  # Update with the path to your JSON file
+    json_path = './comments2.json'  # Update with the path to your JSON file
     load_comments(json_path)

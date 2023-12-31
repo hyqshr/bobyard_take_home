@@ -33,7 +33,9 @@ const CommentPage = () => {
                     date={comment.date}
                     likes={comment.likes}
                     image={comment.image}
-                    onCommentUpdate={fetchComments} // Passing the refresh function
+                    replies={comment.replies} // Include replies
+                    onCommentUpdate={fetchComments}
+                    indentLevel={0} // Start with indentation level 0 for top-level comments
                 />
             ))}
         </div>

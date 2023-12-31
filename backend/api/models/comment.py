@@ -6,6 +6,7 @@ class Comment(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField(default=0)
     image = models.URLField(blank=True, default="")
-
+    parent = models.CharField(max_length=100, default="")
+    
     def __str__(self):
         return self.author
